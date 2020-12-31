@@ -6,9 +6,9 @@ import javax.jms.*;
 
 /**
  * @Author: huzejun
- * @Date: 2020/12/31 21:09
+ * @Date: 2020/12/31 22:59
  */
-public class JmsProduce {
+public class JmsConsumer {
 
     public static final String ACTIVEMQ_URL = "tcp://192.168.31.60:61616";
     public static final String QUEUE_NAME = "queue01";
@@ -25,22 +25,19 @@ public class JmsProduce {
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         //4.创建目的地（具体是队列还是主题topic）
         Queue queue = session.createQueue(QUEUE_NAME);
-        //5.创建消息的生产者
-        MessageProducer messageProducer = session.createProducer(queue);
-        //6 通过使用 messageProducer 消息生产者生产3条消息发送到MQ的队列里面
-        for (int i = 1; i <= 3; i++) {
-            //7 创建消息,好比学生按照老师的要求写好的面试题消息
-            TextMessage textMessage = session.createTextMessage("msg---" + i);//理解为一个字符串
-            //8 通过messageProducer发送消息
-            messageProducer.send(textMessage);
-
+        //5.创建消费者
+        MessageConsumer messageConsumer = session.createConsumer(queue);
+        while (true){
+            TextMessage textMessage = (TextMessage) messageConsumer.receive();
+            if (null != textMessage){
+                System.out.println("消费者接收到消息："+textMessage.getText());
+            }else {
+                break;
+            }
         }
-        //9 关闭资源
-        messageProducer.close();
+        messageConsumer.close();
         session.close();
         connection.close();
 
-        System.out.println("*****消息发布到MQ完成");
-
-
-    }}
+    }
+}
