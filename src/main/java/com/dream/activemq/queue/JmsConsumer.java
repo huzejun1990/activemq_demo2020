@@ -28,7 +28,7 @@ public class JmsConsumer {
         //5.创建消费者
         MessageConsumer messageConsumer = session.createConsumer(queue);
         while (true){
-            TextMessage textMessage = (TextMessage) messageConsumer.receive();
+            TextMessage textMessage = (TextMessage) messageConsumer.receive(4000L);
             if (null != textMessage){
                 System.out.println("消费者接收到消息："+textMessage.getText());
             }else {
