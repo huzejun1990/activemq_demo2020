@@ -15,7 +15,7 @@ public class JmsConsumer {
     public static final String QUEUE_NAME = "queue01";
 
     public static void main(String[] args) throws JMSException, IOException {
-        System.out.println("***我是2号消费者");
+//        System.out.println("***我是2号消费者");
 
         //1.创建连接工场,按照给定的url地址，采用默认用户名和密码
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(ACTIVEMQ_URL);
@@ -59,6 +59,15 @@ public class JmsConsumer {
                     TextMessage textMessage = (TextMessage) message;
                     try {
                         System.out.println("****消费者接收到消息："+textMessage.getText());
+                        System.out.println("****消费者接收到消息属性："+textMessage.getStringProperty("c01"));
+                    } catch (JMSException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (null != message && message instanceof MapMessage){
+                    MapMessage mapMessage = (MapMessage) message;
+                    try {
+                        System.out.println("****消费者接收到消息："+mapMessage.getString("k1"));
                     } catch (JMSException e) {
                         e.printStackTrace();
                     }
