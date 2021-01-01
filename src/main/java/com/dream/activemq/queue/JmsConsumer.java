@@ -59,15 +59,6 @@ public class JmsConsumer {
                     TextMessage textMessage = (TextMessage) message;
                     try {
                         System.out.println("****消费者接收到消息："+textMessage.getText());
-                        System.out.println("****消费者接收到消息属性："+textMessage.getStringProperty("c01"));
-                    } catch (JMSException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (null != message && message instanceof MapMessage){
-                    MapMessage mapMessage = (MapMessage) message;
-                    try {
-                        System.out.println("****消费者接收到消息："+mapMessage.getString("k1"));
                     } catch (JMSException e) {
                         e.printStackTrace();
                     }
@@ -91,6 +82,8 @@ public class JmsConsumer {
         *  3.1 2个消费者都有6条
         *  3.2 先到先得，6条全给一个
         *  3.3 一人一半     Y
+        *
+        *  4 MQ挂了
         * */
     }
 }

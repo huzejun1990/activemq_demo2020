@@ -27,20 +27,13 @@ public class JmsProduce {
         Queue queue = session.createQueue(QUEUE_NAME);
         //5.创建消息的生产者
         MessageProducer messageProducer = session.createProducer(queue);
+//        messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
         //6 通过使用 messageProducer 消息生产者生产3条消息发送到MQ的队列里面
         for (int i = 1; i <= 3; i++) {
             //7 创建消息,好比学生按照老师的要求写好的面试题消息
             TextMessage textMessage = session.createTextMessage("textMessage msg---" + i);//理解为一个字符串
-            textMessage.setStringProperty("c01","VIP");
-
             //8 通过messageProducer发送消息
             messageProducer.send(textMessage);
-
-            MapMessage mapMessage = session.createMapMessage();
-            mapMessage.setString("k1","mapMessage---v1");
-            messageProducer.send(mapMessage);
-
-
         }
         //9 关闭资源
         messageProducer.close();
