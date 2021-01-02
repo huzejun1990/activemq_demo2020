@@ -12,8 +12,8 @@ import java.io.IOException;
 public class JmsConsumer {
 
 //    public static final String ACTIVEMQ_URL = "tcp://192.168.31.60:61616";
-    public static final String ACTIVEMQ_URL = "tcp://localhost:61616";
-    public static final String QUEUE_NAME = "queue01";
+    public static final String ACTIVEMQ_URL = "tcp://192.168.31.60:61616";
+    public static final String QUEUE_NAME = "jdbc01";
 
     public static void main(String[] args) throws JMSException, IOException {
 //        System.out.println("***我是2号消费者");
