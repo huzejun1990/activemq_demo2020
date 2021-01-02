@@ -23,6 +23,7 @@ public class JmsProduceDB {
         Queue queue = session.createQueue(QUEUE_NAME);
 //        MessageConsumer messageConsumer = session.createConsumer(queue);
         MessageProducer messageProducer = session.createProducer(queue);
+        messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
         for (int i = 1; i <= 3; i++) {
             TextMessage textMessage = session.createTextMessage("jdbc msg---: " + i);
             messageProducer.send(textMessage);
