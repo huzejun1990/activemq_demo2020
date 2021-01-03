@@ -11,7 +11,7 @@ import javax.jms.*;
 public class JmsProduce_Topic_Persist {
 
     public static final String ACTIVEMQ_URL = "tcp://192.168.31.60:61616";
-    public static final String TOPIC_NAME = "Topic-Persist";
+    public static final String TOPIC_NAME = "Topic-Jdbc-Persistence";
 
     public static void main(String[] args) throws JMSException {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(ACTIVEMQ_URL);
@@ -22,7 +22,7 @@ public class JmsProduce_Topic_Persist {
         MessageProducer messageProducer = session.createProducer(topic);
 
         connection.start();
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 6; i++) {
             //7 创建消息,好比学生按照老师的要求写好的面试题消息
             TextMessage textMessage = session.createTextMessage("msg-persist---" + i);//理解为一个字符串
             //8 通过messageProducer发送消息

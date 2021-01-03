@@ -10,8 +10,9 @@ import java.io.IOException;
  * @Date: 2021/1/3 0:27
  */
 public class JmsConsumer_DB {
+//    private static final String ACTIVEMQ_URL = "failover:(tcp://192.168.31.60:61616,tcp://192.168.31.60:61617,tcp://192.168.31.60:61618)?randomize=false";
     private static final String ACTIVEMQ_URL = "tcp://192.168.31.60:61616";
-    private static final String QUEUE_NAME = "jdbc02";
+    private static final String QUEUE_NAME = "queue-02";
 
     public static void main(String[] args) throws JMSException, IOException {
 
